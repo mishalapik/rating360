@@ -3,6 +3,8 @@ from aiogram.types import Message
 import asyncio
 import logging
 
+import backend
+
 token = '7097427541:AAHw6BzeEZFjqOq4jQYLLybCut-_3MrL4sM'
 admin_id='1346629196'
 
