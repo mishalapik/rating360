@@ -53,26 +53,34 @@ def check_team(sheets, user_team: str) -> int:
     teams: list = Teams_sheet.get('values')
 
     teams_len: int = len(Teams_sheet.get('values'))
-    team_id: int = -1
+    team_id: int = 0
     for i in range(1, teams_len):
         if teams[i][1] == user_team:
-            team_id = teams[i][0]
+            team_id = int(teams[i][0])
     return team_id
 
 
 @sheets_auth
-def check_member(sheets, user_team: str) -> bool:
+def check_member(sheets, user_team_id: int, user_full_name: str) -> bool:
+    # !!!!! Not Finished yet !!!!!
     """
     Check if member exists in members
     """
     
-    Teams_sheet = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range="Teams").execute()
     Members_sheet = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range="Members").execute()
-    
-    teams: list = Teams_sheet.get('values')
     members: list = Members_sheet.get('values')
 
-    total_teams: int = len(Teams_sheet.get('values')) - 1
-    total_members: int = len(Members_sheet.get('values')) - 1
+    teamates: list = []
+    
+    print(*members)
+    members_len: int = len(Members_sheet.get('values'))
+    member_id: int = 0
+    for i in range(1, members_len):
+        member_database_id: int = int(members[i][0])
+        member_database_name: str = members[i][1]
 
-    print(total_teams, total_members)
+        if member_database_id == user_team_id:
+            member_id = i + 1
+            teamates.append(member_database_name)
+            if member_database_name == user_full_name:
+                pass

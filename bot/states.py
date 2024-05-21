@@ -4,6 +4,6 @@ from aiogram.fsm.state import State,StatesGroup
 
 class authorisation(StatesGroup):
     DEFAULT = State()
-    FULL_NAME = State()
-    TEAM = State()
-    TESTS_ACCEPTED = State()
+    FULL_NAME_DIALOG = State()
+    TEAM_DIALOG = State()
+    AUTH_COMPLETED = State()
