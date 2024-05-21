@@ -44,21 +44,20 @@ def sheets_auth(func):
 
 
 @sheets_auth
-def check_team(sheets, user_team: str) -> bool:
+def check_team(sheets, user_team: str) -> int:
     """
-    Check if the team exists in all teams
+    Check if the team exists in all teams and return its ID
     """
     
     Teams_sheet = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range="Teams").execute()
-    Members_sheet = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range="Members").execute()
-    
     teams: list = Teams_sheet.get('values')
-    members: list = Members_sheet.get('values')
 
-    total_teams: int = len(Teams_sheet.get('values')) - 1
-    total_members: int = len(Members_sheet.get('values')) - 1
-
-    print(total_teams, total_members)
+    teams_len: int = len(Teams_sheet.get('values'))
+    team_id: int = -1
+    for i in range(1, teams_len):
+        if teams[i][1] == user_team:
+            team_id = teams[i][0]
+    return team_id
 
 
 @sheets_auth
