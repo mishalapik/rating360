@@ -53,11 +53,14 @@ def check_team(sheets, user_team: str) -> int:
     teams: list = Teams_sheet.get('values')
 
     teams_len: int = len(Teams_sheet.get('values'))
+    
     team_id: int = 0
+    sheets__team_row: int = 0
     for i in range(1, teams_len):
         if teams[i][1] == user_team:
             team_id = int(teams[i][0])
-    return team_id
+            sheets__team_row = i + 1
+    return (team_id, sheets__team_row)
 
 
 @sheets_auth
@@ -70,7 +73,7 @@ def check_member(sheets, user_team_id: int, user_full_name: str) -> bool:
     Members_sheet = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range="Members").execute()
     members: list = Members_sheet.get('values')
 
-    teamates: list = []
+    teammates: list = []
     
     print(*members)
     members_len: int = len(Members_sheet.get('values'))
@@ -81,6 +84,6 @@ def check_member(sheets, user_team_id: int, user_full_name: str) -> bool:
 
         if member_database_id == user_team_id:
             member_id = i + 1
-            teamates.append(member_database_name)
+            teammates.append(member_database_name)
             if member_database_name == user_full_name:
                 pass
