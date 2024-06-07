@@ -10,7 +10,7 @@ class User:
     team_id: int
     sheets__team_row: int
     
-    teammates: list
+    teammates: list 
 
     
     def __init__(self, team: str = "", team_id: int = 0, sheets__team_row: int = 0, teammates: list = [], member_info: MemberInfo = MemberInfo(), auth_state: bool = False) -> None:
